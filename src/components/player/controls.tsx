@@ -17,11 +17,11 @@ interface ControlsProps {
 }
 
 const Controls: React.FC<ControlsProps> = ({ props }) => {
-  const player = usePlayer();
+  const { isPlaying, setIsPlaying, currentSongId } = usePlayer();
 
 
   function handlePlay() {
-    player?.setIsPlaying(!player?.isPlaying)
+    setIsPlaying(!isPlaying)
   }
 
   function handleBack() {
@@ -36,14 +36,14 @@ const Controls: React.FC<ControlsProps> = ({ props }) => {
     <>
       <Paper sx={{ position: 'fixed', bottom: 0, my: 4 }} elevation={3} >
         <ControlButton onClick={handleBack} label="back" icon={<SkipPreviousOutlined />} />
-        {player?.isPlaying ? (
+        {isPlaying ? (
           <ControlButton onClick={handlePlay} label="playing" icon={<PauseCircleOutline />} />
           ) : (
           <ControlButton onClick={handlePlay} label="paused" icon={<PlayArrowOutlined />} />
         )}
         <ControlButton onClick={handleSkip} label="skip" icon={<SkipNextOutlined />} />
       </Paper>
-      <ReactPlayer playing={player?.isPlaying} url={player?.currentSongId}/>
+      <ReactPlayer playing={isPlaying} url={currentSongId}/>
     </>
   );
 };

@@ -28,6 +28,11 @@ export default function Home() {
                   Go to the player page
               </Button>
           </Box>
+        <Box sx={{ maxWidth: 'sm' }}>
+          <Button variant="contained" component={NextLink} href="/search">
+            Go to the search page
+          </Button>
+        </Box>
         <ProTip />
         <Copyright />
       </Box>

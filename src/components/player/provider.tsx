@@ -3,6 +3,7 @@
 import React, {createContext, Dispatch, ReactNode, SetStateAction, useContext, useState} from 'react';
 import {useSession} from "next-auth/react";
 import {Session} from "next-auth";
+import {SetState} from "@dcat23/lib/types";
 
 interface PlayerProviderProps {
     children: ReactNode;
@@ -16,7 +17,6 @@ type Playlist<T = any> = T & {
     id: string;
 }
 
-type SetState<T> = Dispatch<SetStateAction<T>>
 
 export interface PlayerState {
     playlists: Playlist[]
@@ -31,7 +31,7 @@ export interface PlayerState {
 
 export const PlayerContext =  createContext<PlayerState | undefined>(undefined)
 export function usePlayer() {
-  return useContext(PlayerContext);
+  return useContext(PlayerContext) as PlayerState;
 }
 
 const PlayerProvider = ({ children }: { children: ReactNode }) => {
