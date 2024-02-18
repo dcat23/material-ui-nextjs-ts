@@ -5,3 +5,10 @@ export interface SearchState {
   setQuery: SetState<string>;
   execute(): void;
 }
+
+export interface ResultData {
+  title: string;
+  thumbnail: string;
+  videoId: string;
+  publishDate: number
+}
