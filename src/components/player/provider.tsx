@@ -1,6 +1,6 @@
 'use client'
 
-import React, {createContext, Dispatch, ReactNode, SetStateAction, useState} from 'react';
+import React, {createContext, Dispatch, ReactNode, SetStateAction, useContext, useState} from 'react';
 import {useSession} from "next-auth/react";
 import {Session} from "next-auth";
 
@@ -23,30 +23,25 @@ export interface PlayerState {
     currentSongId: string,
     selectedPlaylist?: Playlist,
     isPlaying: boolean
-    session: Session | null,
-    status: string, // next-auth status
     setPlaylists: SetState<Playlist[]>,
     setSelectedPlaylist: SetState<Playlist>,
     setCurrentSongId: SetState<string>,
     setIsPlaying: SetState<boolean>,
 }
 
-export const PlayerContext =  createContext<PlayerState| undefined>(undefined)
+export const PlayerContext =  createContext<PlayerState | undefined>(undefined)
+export function usePlayer() {
+  return useContext(PlayerContext);
+}
 
-
-
-const PlayerProvider: React.FC<PlayerProviderProps> = ({ children }) => {
-    const {data: session, status} = useSession();
+const PlayerProvider = ({ children }: { children: ReactNode }) => {
     const [playlists, setPlaylists] = useState<Playlist[]>([])
     const [selectedPlaylist, setSelectedPlaylist] = useState<Playlist>()
     const [currentSongId, setCurrentSongId] = useState<string>("")
     const [isPlaying, setIsPlaying] = useState<boolean>(false)
 
-
   return (
     <PlayerContext.Provider value={{
-        session,
-        status,
         playlists,
         currentSongId,
         selectedPlaylist,
