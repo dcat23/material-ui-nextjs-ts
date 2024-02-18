@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   PauseCircleOutline,
   PlayArrowOutlined,
@@ -10,6 +10,7 @@ import {
 import {Paper} from "@mui/material";
 import {usePlayer} from "@dcat23/components/player/provider";
 import ControlButton from "@dcat23/components/player/control-button";
+import ReactPlayer from "react-player";
 
 interface ControlsProps {
   props?: any;
@@ -32,15 +33,18 @@ const Controls: React.FC<ControlsProps> = ({ props }) => {
   }
 
   return (
-    <Paper sx={{ position: 'fixed', bottom: 0, my: 4 }} elevation={3} >
-      <ControlButton onClick={handleBack} label="Back" icon={<SkipPreviousOutlined />} />
-      {player?.isPlaying ? (
-        <ControlButton onClick={handlePlay} label="play" icon={<PlayArrowOutlined />} />
-        ) : (
-        <ControlButton onClick={handlePlay} label="pause" icon={<PauseCircleOutline />} />
-      )}
-      <ControlButton onClick={handleSkip} label="Skip" icon={<SkipNextOutlined />} />
-    </Paper>
+    <>
+      <Paper sx={{ position: 'fixed', bottom: 0, my: 4 }} elevation={3} >
+        <ControlButton onClick={handleBack} label="back" icon={<SkipPreviousOutlined />} />
+        {player?.isPlaying ? (
+          <ControlButton onClick={handlePlay} label="playing" icon={<PauseCircleOutline />} />
+          ) : (
+          <ControlButton onClick={handlePlay} label="paused" icon={<PlayArrowOutlined />} />
+        )}
+        <ControlButton onClick={handleSkip} label="skip" icon={<SkipNextOutlined />} />
+      </Paper>
+      <ReactPlayer playing={player?.isPlaying} url={player?.currentSongId}/>
+    </>
   );
 };
 
