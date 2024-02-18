@@ -24,8 +24,8 @@ export default function Home() {
           Material UI - Next.js App Router example in TypeScript
         </Typography>
           <Box sx={{ maxWidth: 'sm' }}>
-              <Button variant="contained" component={NextLink} href="/about">
-                  Go to the about page
+              <Button variant="contained" component={NextLink} href="/player">
+                  Go to the player page
               </Button>
           </Box>
         <ProTip />

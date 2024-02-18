@@ -17,6 +17,7 @@
     "@mui/material": "latest",
     "@mui/material-nextjs": "latest",
     "next": "latest",
+    "next-auth": "^4.24.6",
     "react": "latest",
     "react-dom": "latest"
   },
