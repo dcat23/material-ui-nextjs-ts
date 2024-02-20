@@ -3,8 +3,12 @@
 import React from 'react';
 import {Avatar, List, ListItemAvatar, ListItemButton, ListItemText, Paper} from "@mui/material";
 import {usePlayer} from "@dcat23/components/player/provider";
+import {Video} from "@prisma/client";
+import moment from "moment";
 
-interface Props {}
+interface Props {
+  playlistId: string;
+}
 
 const items = [
   {
@@ -30,22 +34,25 @@ const items = [
 export default function Playlist(props: Props) {
   const player = usePlayer();
 
-  function handleClick(src: string) {
-    console.log("playing", src.split("."))
-    player?.setCurrentSongId(`/media/m4a/${src}`);
-    player?.setIsPlaying(true);
+
+  function handleClick(song: Video) {
+    if (song == null) return;
+
+    console.log("playing", song.title)
+    player.setCurrentSongId(song.webpageUrl as string);
+    player.setIsPlaying(true);
   }
 
   return (
     <List sx={{ width: "50%"}}>
-      {items.map(({media, src, primary, secondary}, idx) => (
+      {player.selectedPlaylist.all().map((song: Video, idx) => (
         <Paper sx={{my:1}} elevation={3}>
-          <ListItemButton key={idx} onClick={(e) => { handleClick(media)} }>
+          <ListItemButton key={idx} onClick={(e) => { handleClick(song)} }>
             <ListItemAvatar>
-              <Avatar alt="playlist-avatar" src={src} />
+              <Avatar alt="playlist-avatar" src={song.thumbnail as string} />
             </ListItemAvatar>
             {/*<ListItem*/}
-            <ListItemText primary={primary} secondary={secondary}/>
+            <ListItemText primary={song.title} secondary={moment(song.publishDate).fromNow()}/>
           </ListItemButton>
         </Paper>
       ))}

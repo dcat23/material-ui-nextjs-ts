@@ -4,24 +4,18 @@ import React, {createContext, Dispatch, ReactNode, SetStateAction, useContext, u
 import {useSession} from "next-auth/react";
 import {Session} from "next-auth";
 import {SetState} from "@dcat23/lib/types";
+import {Playlist} from "@dcat23/lib/types/player";
+import {youtubePlaylist} from "@dcat23/lib/player";
 
 interface PlayerProviderProps {
     children: ReactNode;
-}
-type Song<T = any> = T & {
-    id: string | number;
-}
-
-type Playlist<T = any> = T & {
-    songs: Song[];
-    id: string;
 }
 
 
 export interface PlayerState {
     playlists: Playlist[]
     currentSongId: string,
-    selectedPlaylist?: Playlist,
+    selectedPlaylist: Playlist,
     isPlaying: boolean
     setPlaylists: SetState<Playlist[]>,
     setSelectedPlaylist: SetState<Playlist>,
@@ -35,8 +29,8 @@ export function usePlayer() {
 }
 
 const PlayerProvider = ({ children }: { children: ReactNode }) => {
-    const [playlists, setPlaylists] = useState<Playlist[]>([])
-    const [selectedPlaylist, setSelectedPlaylist] = useState<Playlist>()
+    const [playlists, setPlaylists] = useState<Playlist[]>([youtubePlaylist])
+    const [selectedPlaylist, setSelectedPlaylist] = useState<Playlist<unknown>>(youtubePlaylist)
     const [currentSongId, setCurrentSongId] = useState<string>("")
     const [isPlaying, setIsPlaying] = useState<boolean>(false)
 
@@ -50,7 +44,6 @@ const PlayerProvider = ({ children }: { children: ReactNode }) => {
         setSelectedPlaylist,
         setCurrentSongId,
         setIsPlaying
-
     }}>
       {children}
     </PlayerContext.Provider>
