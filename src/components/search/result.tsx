@@ -1,19 +1,16 @@
 import React from 'react';
-import {ResultData} from "@dcat23/lib/types/search";
 import Image from "next/image";
-
-import Box from "@mui/material/Box";
-import {decode} from "@dcat23/lib/utils";
-import {Card, CardActions, CardContent, Paper, Skeleton, Typography, Tooltip} from "@mui/material";
+import {decodeUrl} from "@dcat23/lib/utils";
+import {Card, CardContent, Paper, Skeleton, Typography} from "@mui/material";
 import moment from "moment";
-import Button from "@mui/material/Button";
+import {Video} from "@prisma/client";
 
 interface SearchResultProps {
-  data?: ResultData;
+  data?: Video;
 }
 
 const SearchResult: React.FC<SearchResultProps> = ({ data }) => {
-  const title = decode(data?.title as string);
+  const title = decodeUrl(data?.title as string);
 
   return (
     <>
@@ -32,7 +29,7 @@ const SearchResult: React.FC<SearchResultProps> = ({ data }) => {
               {/*<Typography component="h3">*/}
               {/*</Typography>*/}
               <Typography>
-                {decode(data.title)}
+                {decodeUrl(data.title as string)}
               </Typography>
             </CardContent>
             ) : (

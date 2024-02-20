@@ -2,7 +2,8 @@
 
 import React, {createContext, ReactNode, useContext, useState} from 'react';
 import {SearchState} from "@dcat23/lib/types/search";
-import { useRouter } from 'next/navigation';
+import {useRouter} from 'next/navigation';
+import {requestInfo} from "@dcat23/lib/actions";
 
 export const SearchContext = createContext<SearchState | undefined>(undefined)
 export function useSearch() {
@@ -17,7 +18,12 @@ export default function SearchProvider ({ children }: { children: ReactNode }) {
     if (query == "") return;
     console.log("execute search", query)
 
-    router.push(`/search/${encodeURIComponent(query.trim())}`)
+    requestInfo({value: query.trim()})
+      .then((resp) => {
+        router.push(`/search/${encodeURIComponent(query.trim())}`)
+      })
+      .catch(console.log)
+
     setQuery("");
   }
   return (
