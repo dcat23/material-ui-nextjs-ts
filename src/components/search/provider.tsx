@@ -16,15 +16,15 @@ export default function SearchProvider ({ children }: { children: ReactNode }) {
 
   const execute = () => {
     if (query == "") return;
-    console.log("execute search", query)
+    console.log("execute search:", query)
 
     requestInfo({value: query.trim()})
       .then((resp) => {
         router.push(`/search/${encodeURIComponent(query.trim())}`)
+        setQuery("");
       })
       .catch(console.log)
 
-    setQuery("");
   }
   return (
     <SearchContext.Provider value={{query, setQuery , execute}}>

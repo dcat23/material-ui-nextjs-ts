@@ -4,6 +4,8 @@ import {decodeUrl} from "@dcat23/lib/utils";
 import {Card, CardContent, Paper, Skeleton, Typography} from "@mui/material";
 import moment from "moment";
 import {Video} from "@prisma/client";
+import {usePlayer} from "@dcat23/components/player/provider";
+import {Song} from "@dcat23/lib/types/player";
 
 interface SearchResultProps {
   data?: Video;
@@ -11,11 +13,18 @@ interface SearchResultProps {
 
 const SearchResult: React.FC<SearchResultProps> = ({ data }) => {
   const title = decodeUrl(data?.title as string);
+  const player = usePlayer();
+
+  function handleClick() {
+    if (data) {
+      player.selectedPlaylist.add(data as Song<Video>)
+    }
+  }
 
   return (
     <>
       <Paper sx={{mx: 2, my: 5}} elevation={3}>
-        <Card>
+        <Card onClick={handleClick}>
           {data ? (
             <CardContent>
               <Image

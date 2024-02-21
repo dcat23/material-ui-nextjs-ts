@@ -1,0 +1,43 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Query {
+  queryId   BigInt   @id @map("query_id")
+  createdAt DateTime @map("created_at") @db.Timestamp(6)
+  pageToken String?  @map("page_token") @db.VarChar(255)
+  value     String?  @db.VarChar(255)
+
+  @@map("queries")
+}
+
+model Response {
+  id                BigInt  @id
+  etag              String? @db.VarChar(255)
+  nextPageToken     String? @map("next_page_token") @db.VarChar(255)
+  pageToken         String? @map("page_token") @db.VarChar(255)
+  previousPageToken String? @map("previous_page_token") @db.VarChar(255)
+  query             String? @db.VarChar(255)
+  videos            Video[]
+
+  @@map("responses")
+}
+
+model Video {
+  id          BigInt    @id
+  etag        String?   @db.VarChar(255)
+  thumbnail   String?   @db.VarChar(255)
+  title       String?   @db.VarChar(255)
+  publishDate DateTime? @map("publish_date") @db.Timestamp(6)
+  videoId     String?   @map("video_id") @db.VarChar(255)
+  webpageUrl  String?   @map("webpage_url") @db.VarChar(255)
+  fk_resp_id  BigInt?
+  response    Response? @relation(fields: [fk_resp_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fkji0t30ymihuoahslb373pw5c")
+
+  @@map("video_result")
+}
