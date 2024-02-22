@@ -16,19 +16,19 @@ const items: Song<any>[] = [
     src: "",
     title: "Days Before Rodeo (Full Mixtape)",
     secondary: "Travis Scott",
-    media: "Days Before Rodeo (Full Mixtape) [c4il_1ut3WU].m4a"
+    webpageUrl: "Days Before Rodeo (Full Mixtape) [c4il_1ut3WU].m4a"
   },
   {
     src: "",
     title: "Control ft Kendrick Lamar, Jay Electronica",
     secondary: "Big Sean",
-    media: "Big Sean Control ft Kendrick Lamar, Jay Electronica [Lyrics] DIRTY (OFFICIAL LYRICS) [6S9K55amRBQ].m4a"
+    webpageUrl: "Big Sean Control ft Kendrick Lamar, Jay Electronica [Lyrics] DIRTY (OFFICIAL LYRICS) [6S9K55amRBQ].m4a"
   },
   {
     src: "",
     title: "Earned It Prod By. Young Chop",
     secondary: "Chief Keef",
-    media: "Chief Keef - Earned It Prod By. Young Chop [jJgS9MY2WD8].m4a"
+    webpageUrl: "Chief Keef - Earned It Prod By. Young Chop [jJgS9MY2WD8].m4a"
   },
 ]
 

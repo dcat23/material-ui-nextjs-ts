@@ -2,10 +2,9 @@ import {InfoRequest} from "@dcat23/lib/types/api";
 import {Response} from "@prisma/client";
 import {BASE_API_URL} from "@dcat23/lib/constants";
 
-const apiUrl = new URL(BASE_API_URL);
 
 export async function requestInfo(info: InfoRequest): Promise<Response> {
-
+  const apiUrl = new URL(BASE_API_URL);
   apiUrl.pathname += "/yt/info";
 
   const response = await fetch(apiUrl, {
