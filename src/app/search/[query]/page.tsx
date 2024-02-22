@@ -2,7 +2,7 @@ import React, {Suspense} from 'react';
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import {decodeUrl} from "@dcat23/lib/utils";
-import {Grid} from "@mui/material";
+import {Card, CardContent, Grid, Paper, Skeleton} from "@mui/material";
 import SearchResult from "@dcat23/components/search/result";
 import prisma from "@dcat23/lib/prisma";
 
@@ -37,7 +37,15 @@ const QueryPage: React.FC<QueryPageProps> = async ({ params }) => {
             columns={{ xs: 4, sm: 8, md: 12 }}
           >
             {Array.from(new Array(5)).map((_, idx) => (
-              <SearchResult key={idx} />
+              <Paper key={idx} sx={{mx: 2, my: 5}} elevation={3}>
+                <Card>
+                  <CardContent>
+                    <Skeleton variant="rectangular" width={210} height={118} />
+                    <Skeleton />
+                    <Skeleton width="60%" />
+                  </CardContent>
+                </Card>
+              </Paper>
             ))}
           </Grid>
         }

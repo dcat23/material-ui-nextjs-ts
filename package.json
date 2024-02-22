@@ -23,7 +23,8 @@
     "next-auth": "^4.24.6",
     "react": "latest",
     "react-dom": "latest",
-    "react-player": "^2.14.1"
+    "react-player": "^2.14.1",
+    "sonner": "^1.4.0"
   },
   "devDependencies": {
     "@types/node": "latest",

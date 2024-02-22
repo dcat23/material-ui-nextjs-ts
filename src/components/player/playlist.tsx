@@ -47,12 +47,11 @@ export default function Playlist(props: Props) {
   return (
     <List sx={{ width: "50%"}}>
       {items.map((song: Song, idx) => (
-        <Paper sx={{my:1}} elevation={3}>
-          <ListItemButton key={idx} onClick={(e) => { handleClick(song)} }>
+        <Paper key={idx} sx={{my:1}} elevation={3}>
+          <ListItemButton onClick={(e) => { handleClick(song)} }>
             <ListItemAvatar>
               <Avatar alt="playlist-avatar" src={song.thumbnail as string} />
             </ListItemAvatar>
-            {/*<ListItem*/}
             <ListItemText primary={song.title} secondary={moment(song.publishDate).fromNow()}/>
           </ListItemButton>
         </Paper>
