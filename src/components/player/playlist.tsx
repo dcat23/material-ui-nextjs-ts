@@ -5,27 +5,28 @@ import {Avatar, List, ListItemAvatar, ListItemButton, ListItemText, Paper} from 
 import {usePlayer} from "@dcat23/components/player/provider";
 import {Video} from "@prisma/client";
 import moment from "moment";
+import {Song} from "@dcat23/lib/types/player";
 
 interface Props {
-  playlistId: string;
+  playlistId?: string;
 }
 
-const items = [
+const items: Song<any>[] = [
   {
     src: "",
-    primary: "Days Before Rodeo (Full Mixtape)",
+    title: "Days Before Rodeo (Full Mixtape)",
     secondary: "Travis Scott",
     media: "Days Before Rodeo (Full Mixtape) [c4il_1ut3WU].m4a"
   },
   {
     src: "",
-    primary: "Control ft Kendrick Lamar, Jay Electronica",
+    title: "Control ft Kendrick Lamar, Jay Electronica",
     secondary: "Big Sean",
     media: "Big Sean Control ft Kendrick Lamar, Jay Electronica [Lyrics] DIRTY (OFFICIAL LYRICS) [6S9K55amRBQ].m4a"
   },
   {
     src: "",
-    primary: "Earned It Prod By. Young Chop",
+    title: "Earned It Prod By. Young Chop",
     secondary: "Chief Keef",
     media: "Chief Keef - Earned It Prod By. Young Chop [jJgS9MY2WD8].m4a"
   },
@@ -45,7 +46,7 @@ export default function Playlist(props: Props) {
 
   return (
     <List sx={{ width: "50%"}}>
-      {player.selectedPlaylist.all().map((song: Video, idx) => (
+      {items.map((song: Song, idx) => (
         <Paper sx={{my:1}} elevation={3}>
           <ListItemButton key={idx} onClick={(e) => { handleClick(song)} }>
             <ListItemAvatar>
