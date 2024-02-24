@@ -5,7 +5,7 @@ import {useSession} from "next-auth/react";
 import {Session} from "next-auth";
 import {SetState} from "@dcat23/lib/types";
 import {Playlist} from "@dcat23/lib/types/player";
-import {youtubePlaylist} from "@dcat23/lib/player";
+import {youtubePlaylist} from "@dcat23/lib/playlist/youtube";
 
 interface PlayerProviderProps {
     children: ReactNode;

@@ -6,7 +6,7 @@ export default function Player() {
   return (
     <>
       <Playlist />
-      <Controls />
+      {/*<Controls />*/}
     </>
   );
 }

@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react';
-import {FormControl, InputAdornment, InputLabel, OutlinedInput} from "@mui/material";
+import {FormControl, InputAdornment, InputLabel, OutlinedInput, Paper} from "@mui/material";
 import Box from "@mui/material/Box";
 import {useSearch} from "@dcat23/components/search/provider";
 import {InputChangeEvent, InputKeyboardEvent} from "@dcat23/lib/types/events";

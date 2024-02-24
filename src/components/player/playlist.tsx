@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Avatar, List, ListItemAvatar, ListItemButton, ListItemText, Paper} from "@mui/material";
 import {usePlayer} from "@dcat23/components/player/provider";
 import {Video} from "@prisma/client";
@@ -33,20 +33,30 @@ const items: Song<any>[] = [
 ]
 
 export default function Playlist(props: Props) {
-  const player = usePlayer();
+  const {
+    selectedPlaylist,
+    setCurrentSongId,
+    setIsPlaying } = usePlayer();
+
+  const [playlist, setPlaylist] = useState(selectedPlaylist.all())
+  useEffect(() => {
+    setPlaylist(selectedPlaylist.all())
+
+  }, [selectedPlaylist]);
+
 
 
   function handleClick(song: Video) {
     if (song == null) return;
 
     console.log("playing", song.title)
-    player.setCurrentSongId(song.webpageUrl as string);
-    player.setIsPlaying(true);
+    setCurrentSongId(song.webpageUrl as string);
+    setIsPlaying(true);
   }
 
   return (
     <List sx={{ width: "50%"}}>
-      {items.map((song: Song, idx) => (
+      {playlist.map((song: Song, idx) => (
         <Paper key={idx} sx={{my:1}} elevation={3}>
           <ListItemButton onClick={(e) => { handleClick(song)} }>
             <ListItemAvatar>

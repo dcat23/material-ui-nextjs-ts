@@ -11,13 +11,14 @@ import {Paper} from "@mui/material";
 import {usePlayer} from "@dcat23/components/player/provider";
 import ControlButton from "@dcat23/components/player/control-button";
 import ReactPlayer from "react-player";
+import Box from "@mui/material/Box";
 
 interface ControlsProps {
   props?: any;
 }
 
 const Controls: React.FC<ControlsProps> = ({ props }) => {
-  const { isPlaying, setIsPlaying, currentSongId } = usePlayer();
+  const { isPlaying, setIsPlaying, currentSongId, selectedPlaylist } = usePlayer();
 
 
   function handlePlay() {
@@ -25,7 +26,7 @@ const Controls: React.FC<ControlsProps> = ({ props }) => {
   }
 
   function handleBack() {
-    // player.
+
   }
 
   function handleSkip() {
@@ -34,7 +35,14 @@ const Controls: React.FC<ControlsProps> = ({ props }) => {
 
   return (
     <>
-      <Paper sx={{ position: 'fixed', bottom: 0, my: 4 }} elevation={3} >
+      <Paper
+        sx={{
+          position: 'fixed',
+          bottom: 0,
+          my: 4,
+          alignItems: 'center'
+        }}
+        elevation={3} >
         <ControlButton onClick={handleBack} label="back" icon={<SkipPreviousOutlined />} />
         {isPlaying ? (
           <ControlButton onClick={handlePlay} label="playing" icon={<PauseCircleOutline />} />
@@ -43,7 +51,14 @@ const Controls: React.FC<ControlsProps> = ({ props }) => {
         )}
         <ControlButton onClick={handleSkip} label="skip" icon={<SkipNextOutlined />} />
       </Paper>
-      <ReactPlayer playing={isPlaying} url={currentSongId}/>
+      <ReactPlayer
+        playing={isPlaying}
+        url={currentSongId}
+        style={{display: "none"}}
+        // style={{ position: "fixed", zIndex: -1, filter: "blur(12px)" }}
+        // width={"100%"}
+        // height={"100%"}
+      />
     </>
   );
 };

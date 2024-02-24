@@ -1,11 +1,17 @@
 export type Song<T = any> = T & {
-  id: string | number;
+  next: T | null;
+  prev: T | null;
 }
 
+
+
 export interface Playlist<T = any> {
-  id: string;
-  songs: Set<Song<T>>;
-  add(song: Song<T>): void;
-  remove(song: Song<T>): void;
-  all(): Array<Song<T>>
+  name: string;
+  current: Song<T> | null;
+  all: Array<Song<T>>
+  add(song: T): void;
+  addNext(song: T): void;
+  remove(song: T): void;
+  skip(): void;
 }
+

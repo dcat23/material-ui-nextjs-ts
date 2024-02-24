@@ -4,6 +4,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import SearchBar from '@dcat23/components/search/search-bar';
 import SearchProvider from "@dcat23/components/search/provider";
+import {Paper} from "@mui/material";
 
 export default function SearchLayout ({ children }: { children: ReactNode }) {
   return (
